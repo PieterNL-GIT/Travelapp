@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b1020" />
+    <title>Samen Reisplanner</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-blur"></div>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Family Travel OS</p>
+        <h1>Samen Reisplanner</h1>
+      </div>
+      <div class="trip-switcher">
+        <label for="trip-select">Actieve reis</label>
+        <select id="trip-select"></select>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Nieuwe reis</h2>
+        <form id="trip-form" class="grid-form">
+          <input id="trip-name" type="text" placeholder="Bijv. Japan 2026" required />
+          <input id="trip-destination" type="text" placeholder="Bestemming / regio" required />
+          <button type="submit">Toevoegen</button>
+        </form>
+        <p id="trip-summary" class="muted"></p>
+      </section>
+
+      <section class="card split">
+        <div>
+          <h2>Reisgenoten</h2>
+          <form id="member-form" class="row-form">
+            <input id="member-name" type="text" placeholder="Naam" required />
+            <button type="submit">+ Toevoegen</button>
+          </form>
+          <ul id="member-list"></ul>
+        </div>
+
+        <div>
+          <h2>Reisdatabase</h2>
+          <form id="item-form" class="grid-form">
+            <select id="item-category" required></select>
+            <input id="item-title" type="text" placeholder="Titel" required />
+            <input id="item-notes" type="text" placeholder="Notitie of link" />
+            <button type="submit">Opslaan</button>
+          </form>
+          <div id="category-columns" class="columns"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Routeplanner + Google Maps</h2>
+        <form id="route-form" class="grid-form">
+          <input id="route-day" type="text" placeholder="Dag (Dag 1)" required />
+          <input id="route-stop" type="text" placeholder="Locatie / stop" required />
+          <input id="route-time" type="text" placeholder="Tijd (optioneel)" />
+          <button type="submit">Stop toevoegen</button>
+        </form>
+
+        <details class="api-box">
+          <summary>Google Maps API instellen (eenmalig)</summary>
+          <div class="row-form">
+            <input id="maps-api-key" type="password" placeholder="Google Maps JavaScript API key" />
+            <button id="save-api-key" type="button">Sleutel opslaan</button>
+          </div>
+          <p class="muted">De sleutel blijft lokaal in je browser en wordt gebruikt voor kaart + routeweergave.</p>
+        </details>
+
+        <p id="map-status" class="muted"></p>
+        <div id="map" aria-label="Google routekaart"></div>
+        <ul id="route-list"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Live inspiratie</h2>
+        <p class="muted">Zoekt automatisch actuele artikelen en community-posts voor je bestemming.</p>
+        <button id="refresh-inspiration" type="button">Inspiratie vernieuwen</button>
+        <div class="inspiration-grid">
+          <div>
+            <h3>Blogs & artikelen</h3>
+            <ul id="blog-list"></ul>
+          </div>
+          <div>
+            <h3>Trending community</h3>
+            <ul id="social-list"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <small>PWA prototype — data wordt lokaal opgeslagen per apparaat.</small>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

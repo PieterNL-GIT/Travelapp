@@ -1,0 +1,11 @@
+{
+  "name": "Samen Reisplanner",
+  "short_name": "Reisplanner",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#070b16",
+  "theme_color": "#0b1020",
+  "lang": "nl",
+  "description": "Plan samen meerdere reizen met routekaart en inspiratie.",
+  "icons": []
+}
