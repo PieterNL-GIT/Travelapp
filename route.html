@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b1020" />
+    <title>Samen Reisplanner · Routekaart</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Family Travel OS</p>
+        <h1>Routekaart</h1>
+      </div>
+      <div class="user-box">
+        <p id="current-user" class="muted"></p>
+        <button id="logout-btn" type="button">Uitloggen</button>
+      </div>
+      <div class="trip-switcher">
+        <label for="trip-select">Actieve reis</label>
+        <select id="trip-select"></select>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <a class="tab" href="index.html">Reizen</a>
+      <a class="tab" href="database.html">Database</a>
+      <a class="tab active" href="route.html">Routekaart</a>
+      <a class="tab" href="inspiratie.html">Inspiratie</a>
+    </nav>
+
+    <main>
+      <section class="card">
+        <h2>Routepunten toevoegen</h2>
+        <form id="route-form" class="grid-form">
+          <input id="route-day" type="text" placeholder="Dag (Dag 1)" required />
+          <input id="route-stop" type="text" placeholder="Locatie / stop" required />
+          <input id="route-time" type="text" placeholder="Tijd (optioneel)" />
+          <button type="submit">Toevoegen</button>
+        </form>
+
+        <details class="api-box">
+          <summary>Google Maps API instellen (eenmalig)</summary>
+          <div class="row-form">
+            <input id="maps-api-key" type="password" placeholder="Google Maps JavaScript API key" />
+            <button id="save-api-key" type="button">Sleutel opslaan</button>
+          </div>
+        </details>
+
+        <p id="map-status" class="muted"></p>
+        <div id="map"></div>
+      </section>
+
+      <section class="card">
+        <h2>Slimme dagplanner</h2>
+        <form id="day-plan-form" class="grid-form">
+          <input id="plan-day" type="text" placeholder="Dag (Dag 1)" required />
+          <select id="plan-period" required>
+            <option>Ochtend</option>
+            <option>Middag</option>
+            <option>Avond</option>
+          </select>
+          <input id="plan-activity" type="text" placeholder="Activiteit" required />
+          <input id="plan-location" type="text" placeholder="Locatie" required />
+          <input id="plan-travel" type="number" min="0" placeholder="Reistijd in minuten" required />
+          <button type="submit">Blok toevoegen</button>
+        </form>
+        <p id="day-plan-warning" class="muted"></p>
+        <div id="day-plan-list" class="day-plan-list"></div>
+      </section>
+
+      <section class="card">
+        <h2>Routeoverzicht</h2>
+        <ul id="route-list"></ul>
+      </section>
+    </main>
+
+    <script src="common.js"></script>
+    <script src="app-route.js"></script>
+  </body>
+</html>

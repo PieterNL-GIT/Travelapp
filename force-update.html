@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reisplanner · Herstel</title>
+    <style>
+      body { font-family: Inter, Arial, sans-serif; margin: 0; background: #0b1020; color: #eef3ff; }
+      main { max-width: 620px; margin: 12vh auto; padding: 1rem; }
+      .card { border: 1px solid rgba(255,255,255,.2); border-radius: 12px; padding: 1rem; background: rgba(255,255,255,.05); }
+      button { width: 100%; padding: .8rem; border-radius: 10px; border: 0; cursor: pointer; background: linear-gradient(120deg, #3873ff, #26d0ce); color: #fff; font-weight: 700; }
+      p { color: #b7c5e9; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="card">
+        <h1>Herstel oude versie</h1>
+        <p>Klik hieronder om cache en service worker op te schonen. Daarna ga je automatisch naar de nieuwste loginpagina.</p>
+        <button id="recover-btn" type="button">Nu herstellen</button>
+        <p id="status"></p>
+      </section>
+    </main>
+    <script>
+      const statusEl = document.getElementById("status");
+      async function recover() {
+        const btn = document.getElementById("recover-btn");
+        btn.disabled = true;
+        statusEl.textContent = "Bezig met opschonen...";
+
+        if ("serviceWorker" in navigator) {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(regs.map((r) => r.unregister()));
+        }
+
+        if ("caches" in window) {
+          const keys = await caches.keys();
+          await Promise.all(keys.map((k) => caches.delete(k)));
+        }
+
+        localStorage.removeItem("travelapp-sw-reloaded");
+        sessionStorage.removeItem("travelapp-sw-reloaded");
+        statusEl.textContent = "Gelukt! Je wordt doorgestuurd...";
+        window.location.href = "./login.html?fresh=" + Date.now();
+      }
+
+      document.getElementById("recover-btn").addEventListener("click", () => {
+        recover().catch(() => {
+          statusEl.textContent = "Herstel mislukt. Probeer een privévenster.";
+        });
+      });
+    </script>
+  </body>
+</html>
