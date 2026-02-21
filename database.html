@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b1020" />
+    <title>Samen Reisplanner · Database</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Family Travel OS</p>
+        <h1>Reisdatabase</h1>
+      </div>
+      <div class="user-box">
+        <p id="current-user" class="muted"></p>
+        <button id="logout-btn" type="button">Uitloggen</button>
+      </div>
+      <div class="trip-switcher">
+        <label for="trip-select">Actieve reis</label>
+        <select id="trip-select"></select>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <a class="tab" href="index.html">Reizen</a>
+      <a class="tab active" href="database.html">Database</a>
+      <a class="tab" href="route.html">Routekaart</a>
+      <a class="tab" href="inspiratie.html">Inspiratie</a>
+    </nav>
+
+    <main>
+      <section class="card">
+        <h2>Iets opslaan</h2>
+        <form id="item-form" class="grid-form">
+          <select id="item-category" required></select>
+          <input id="item-title" type="text" placeholder="Titel" required />
+          <input id="item-notes" type="text" placeholder="Notitie of link" />
+          <button type="submit">Opslaan</button>
+        </form>
+
+      </section>
+
+      <section class="card">
+        <h2>Categorieën + voting</h2>
+        <div id="category-columns" class="columns"></div>
+      </section>
+    </main>
+
+    <script src="common.js"></script>
+    <script src="app-database.js"></script>
+  </body>
+</html>
