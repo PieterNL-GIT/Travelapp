@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b1020" />
+    <title>Samen Reisplanner · Reizen</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Family Travel OS</p>
+        <h1>Samen Reisplanner</h1>
+      </div>
+      <div class="user-box">
+        <p id="current-user" class="muted"></p>
+        <button id="logout-btn" type="button">Uitloggen</button>
+      </div>
+      <div class="trip-switcher">
+        <label for="trip-select">Actieve reis</label>
+        <select id="trip-select"></select>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <a class="tab active" href="index.html">Reizen</a>
+      <a class="tab" href="database.html">Database</a>
+      <a class="tab" href="route.html">Routekaart</a>
+      <a class="tab" href="inspiratie.html">Inspiratie</a>
+    </nav>
+
+    <main>
+      <section class="card">
+        <h2>Nieuwe reis</h2>
+        <form id="trip-form" class="grid-form">
+          <input id="trip-name" type="text" placeholder="Bijv. Japan 2026" required />
+          <input id="trip-destination" type="text" placeholder="Bestemming / regio" required />
+          <button type="submit">Reis toevoegen</button>
+        </form>
+        <p id="trip-summary" class="muted"></p>
+      </section>
+
+      <section class="card">
+        <h2>Reisgenoten</h2>
+        <form id="member-form" class="row-form">
+          <input id="member-name" type="text" placeholder="Naam reisgenoot" required />
+          <button type="submit">+ Toevoegen</button>
+        </form>
+        <ul id="member-list"></ul>
+      </section>
+    </main>
+
+    <script src="common.js"></script>
+    <script src="app-home.js"></script>
+  </body>
+</html>
