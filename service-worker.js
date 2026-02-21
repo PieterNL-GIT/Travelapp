@@ -1,4 +1,4 @@
-const CACHE_NAME = "travelapp-cache-v5";
+const CACHE_NAME = "travelapp-cache-v3";
 const ASSETS = [
   "./",
   "./login.html",
@@ -18,22 +18,12 @@ const ASSETS = [
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
-  self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches
-      .keys()
-      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
-      .then(() => self.clients.claim())
+    caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
   );
-});
-
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
-    self.skipWaiting();
-  }
 });
 
 self.addEventListener("fetch", (event) => {
@@ -41,26 +31,5 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  const isSameOrigin = event.request.url.startsWith(self.location.origin);
-
-  if (!isSameOrigin) {
-    event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
-    return;
-  }
-
-  event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-        return response;
-      })
-      .catch(() => {
-        if (event.request.mode === "navigate") {
-          return caches.match(event.request).then((cached) => cached || caches.match("./index.html"));
-        }
-
-        return caches.match(event.request);
-      })
-  );
+  event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
 });

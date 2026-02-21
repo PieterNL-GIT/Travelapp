@@ -324,36 +324,5 @@ enforceAuth();
 renderUserBadge();
 
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .register("./service-worker.js")
-    .then((registration) => {
-      registration.update().catch(() => {});
-
-      if (registration.waiting) {
-        registration.waiting.postMessage({ type: "SKIP_WAITING" });
-      }
-
-      registration.addEventListener("updatefound", () => {
-        const newWorker = registration.installing;
-        if (!newWorker) {
-          return;
-        }
-
-        newWorker.addEventListener("statechange", () => {
-          if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
-            newWorker.postMessage({ type: "SKIP_WAITING" });
-          }
-        });
-      });
-
-      navigator.serviceWorker.addEventListener("controllerchange", () => {
-        if (sessionStorage.getItem("travelapp-sw-reloaded")) {
-          return;
-        }
-
-        sessionStorage.setItem("travelapp-sw-reloaded", "1");
-        window.location.reload();
-      });
-    })
-    .catch(() => {});
+  navigator.serviceWorker.register("./service-worker.js").catch(() => {});
 }
