@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b1020" />
+    <title>Samen Reisplanner · Inspiratie</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Family Travel OS</p>
+        <h1>Live Inspiratie</h1>
+      </div>
+      <div class="user-box">
+        <p id="current-user" class="muted"></p>
+        <button id="logout-btn" type="button">Uitloggen</button>
+      </div>
+      <div class="trip-switcher">
+        <label for="trip-select">Actieve reis</label>
+        <select id="trip-select"></select>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <a class="tab" href="index.html">Reizen</a>
+      <a class="tab" href="database.html">Database</a>
+      <a class="tab" href="route.html">Routekaart</a>
+      <a class="tab active" href="inspiratie.html">Inspiratie</a>
+    </nav>
+
+    <main>
+      <section class="card">
+        <h2>Eigen inspiratie-link opslaan</h2>
+        <form id="custom-link-form" class="grid-form">
+          <input id="custom-link-title" type="text" placeholder="Titel (bijv. Blog met kindvriendelijke tips)" required />
+          <input id="custom-link-url" type="url" placeholder="https://..." required />
+          <input id="custom-link-notes" type="text" placeholder="Korte notitie (optioneel)" />
+          <button type="submit">Link opslaan</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Actuele bronnen</h2>
+        <p class="muted">Zoekt direct in Wikipedia en Reddit op basis van de actieve bestemming.</p>
+        <div class="grid-form">
+          <select id="quick-category"></select>
+          <input id="quick-day" type="text" placeholder="Dag voor route (bijv. Dag 2)" />
+          <button id="refresh-inspiration" type="button">Inspiratie vernieuwen</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Mijn opgeslagen links</h3>
+        <ul id="saved-link-list"></ul>
+      </section>
+
+      <section class="card inspiration-grid">
+        <div>
+          <h3>Blogs & artikelen</h3>
+          <ul id="blog-list"></ul>
+        </div>
+        <div>
+          <h3>Trending community</h3>
+          <ul id="social-list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="common.js"></script>
+    <script src="app-inspiration.js"></script>
+  </body>
+</html>
