@@ -2,57 +2,87 @@
 <html lang="nl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#0b1020" />
-    <title>Samen Reisplanner · Reizen</title>
-    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samen Reisplanner</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="topbar">
-      <div>
-        <p class="eyebrow">Family Travel OS</p>
-        <h1>Samen Reisplanner</h1>
-      </div>
-      <div class="user-box">
-        <p id="current-user" class="muted"></p>
-        <button id="logout-btn" type="button">Uitloggen</button>
-      </div>
-      <div class="trip-switcher">
-        <label for="trip-select">Actieve reis</label>
-        <select id="trip-select"></select>
-      </div>
+    <header>
+      <h1>Samen Reisplanner</h1>
+      <p>Plan, bewaar en inspireer elkaar voor al jullie reizen.</p>
     </header>
-
-    <nav class="tabs">
-      <a class="tab active" href="index.html">Reizen</a>
-      <a class="tab" href="database.html">Database</a>
-      <a class="tab" href="route.html">Routekaart</a>
-      <a class="tab" href="inspiratie.html">Inspiratie</a>
-    </nav>
 
     <main>
       <section class="card">
-        <h2>Nieuwe reis</h2>
-        <form id="trip-form" class="grid-form">
-          <input id="trip-name" type="text" placeholder="Bijv. Japan 2026" required />
+        <h2>Reizen beheren</h2>
+        <form id="trip-form" class="row-form">
+          <input id="trip-name" type="text" placeholder="Bijv. Italië zomer 2026" required />
           <input id="trip-destination" type="text" placeholder="Bestemming / regio" required />
           <button type="submit">Reis toevoegen</button>
         </form>
-        <p id="trip-summary" class="muted"></p>
-      </section>
 
-      <section class="card">
-        <h2>Reisgenoten</h2>
+        <label for="trip-select">Geselecteerde reis</label>
+        <select id="trip-select"></select>
+
+        <h3>Reisgenoten</h3>
         <form id="member-form" class="row-form">
           <input id="member-name" type="text" placeholder="Naam reisgenoot" required />
-          <button type="submit">+ Toevoegen</button>
+          <button type="submit">Toevoegen</button>
         </form>
         <ul id="member-list"></ul>
       </section>
+
+      <section class="card">
+        <h2>Dingen opslaan per categorie</h2>
+        <form id="item-form" class="grid-form">
+          <select id="item-category" required>
+            <option value="Stad">Stad</option>
+            <option value="Eten">Eten</option>
+            <option value="Museum">Museum</option>
+            <option value="Hotel">Hotel</option>
+            <option value="Activiteit">Activiteit</option>
+          </select>
+          <input id="item-title" type="text" placeholder="Wat wil je bewaren?" required />
+          <input id="item-notes" type="text" placeholder="Notities / link" />
+          <button type="submit">Opslaan</button>
+        </form>
+        <div id="category-columns" class="columns"></div>
+      </section>
+
+      <section class="card">
+        <h2>Routeplanner</h2>
+        <form id="route-form" class="grid-form">
+          <input id="route-day" type="text" placeholder="Dag (bijv. Dag 1)" required />
+          <input id="route-stop" type="text" placeholder="Stop / activiteit" required />
+          <input id="route-time" type="text" placeholder="Tijd (optioneel)" />
+          <button type="submit">Toevoegen aan route</button>
+        </form>
+        <ul id="route-list"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Inspiratie</h2>
+        <p class="muted">
+          Automatisch voorbeeldoverzicht met blogs van gezinnen en trending social posts
+          voor de huidige bestemming.
+        </p>
+        <div class="inspiration-grid">
+          <div>
+            <h3>Persoonlijke blogs</h3>
+            <ul id="blog-list"></ul>
+          </div>
+          <div>
+            <h3>Trending op Insta/TikTok</h3>
+            <ul id="social-list"></ul>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <script src="common.js"></script>
-    <script src="app-home.js"></script>
+    <footer>
+      <small>Prototype - data wordt lokaal in je browser opgeslagen.</small>
+    </footer>
+
+    <script src="app.js"></script>
   </body>
 </html>
